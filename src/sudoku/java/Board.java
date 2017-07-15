@@ -222,7 +222,7 @@ public class Board implements Initializable {
 				} else if (cell2.status.equals(CStatus.NOTE)) {
 					cell2.setEffect(null);
 					cell2.isHighLight = false;
-					cell2.setNoteStatus(24 - cell2.getText().length() * 4);
+					cell2.setNoteStatus(getFontSize(cell2.getText()));
 				}
 			}
 		}
@@ -349,10 +349,7 @@ public class Board implements Initializable {
 					}
 					Collections.sort(candidates);
 					String cellText = String.join("", candidates);
-					int fontSize = 20;
-					if (cellText.length() <= 2) fontSize = 24 - cellText.length() * 4;
-					else fontSize = 12;
-					cell.setNoteStatus(fontSize);
+					cell.setNoteStatus(getFontSize(cellText));
 					cell.wrapTextProperty().setValue(true);
 					cell.setText(cellText);
 				}
@@ -389,7 +386,7 @@ public class Board implements Initializable {
 					if (cell.status.equals(CStatus.INIT) && !cell.isHighLight) {
 						cell.setInitStatus();
 					} else if (cell.status.equals(CStatus.NOTE)) {
-						cell.setNoteStatus(24 - cell.getText().length() * 4);
+						cell.setNoteStatus(getFontSize(cell.getText()));
 						cell.setEffect(null);
 					} else if (cell.status.equals(CStatus.ERROR)) {
 						cell.setErrorStatus();
@@ -400,13 +397,18 @@ public class Board implements Initializable {
 		}
 	}
 
+	private int getFontSize(String cellText) {
+		if (cellText.length() <= 2) return 24 - cellText.length() * 4;
+		else return 12;
+	}
+
 	@FXML private void hideAllHighLightCells() {
 		for (SCell cell : cells) {
 			cell.isHighLight = false;
 			if (cell.status.equals(CStatus.INIT) && !cell.isHighLight) {
 				cell.setInitStatus();
 			} else if (cell.status.equals(CStatus.NOTE)) {
-				cell.setNoteStatus(24 - cell.getText().length() * 4);
+				cell.setNoteStatus(getFontSize(cell.getText()));
 				cell.setEffect(null);
 			} else if (cell.status.equals(CStatus.ERROR)) {
 				cell.setErrorStatus();
