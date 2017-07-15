@@ -1,0 +1,62 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+
+        {
+            "group": "build",
+            "taskName": "javac",
+            "command": "javac",
+            "type": "shell",
+            "args": [
+                "-d",
+                "${workspaceRoot}/bin",
+                "${workspaceRoot}/src/sudoku/java/*.java"
+            ],
+            "problemMatcher": []
+        },
+
+        {
+            "group": "build",
+            "taskName": "java",
+            "command": "java",
+            "type": "shell",
+            "args": [
+                "-classpath",
+                "${workspaceRoot}/bin",
+                "sudoku.java.Main"
+            ],
+            "problemMatcher": []
+        },
+
+        {
+            "group": "build",
+            "taskName": "jar",
+            "command": "jar",
+            "type": "shell",
+            "args": [
+                "cvfe",
+                "${workspaceRoot}/bin/sudoku.jar",
+                "sudoku.java.Main",
+                "-C",
+                "bin",
+                "sudoku",
+                "example",
+                "LICENSE",
+                "README.md"
+            ],
+            "problemMatcher": []
+        },
+
+        {
+            "group": "build",
+            "taskName": "run",
+            "command": "sh",
+            "type": "shell",
+            "args": [
+                "${workspaceRoot}/.vscode/run.sh"
+            ],
+            "problemMatcher": []
+        }
+
+    ]
+}
